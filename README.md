@@ -5,15 +5,23 @@ una implementación **reproducible y 100% documentada** del sistema de
 filtrado curricular de Terry & Valdez, ejecutable directamente en
 **Google Colab**, sin instalar nada localmente.
 
-El sistema recibe un currículum (PDF), lo protege, lo evalúa contra una
-rúbrica de 7 criterios mediante 7 consultas **independientes** a un modelo
-de lenguaje, y produce una clasificación auditable — sin decidir nunca por
-sí solo quién pasa a entrevista.
+El sistema recibe un currículum (PDF), lo protege, lo evalúa contra la
+**rúbrica real del proyecto** (perfil AL · Asistente Legal) mediante 7
+consultas **independientes** a un modelo de lenguaje, y produce una
+clasificación auditable — sin decidir nunca por sí solo quién pasa a
+entrevista.
 
-> ⚠️ **Todos los CVs usados en estos notebooks son ficticios**, construidos
-> solo para la demostración. Ningún dato de candidatos reales del proyecto
-> se publica en este repositorio — ver [`materiales/README.md`](materiales/README.md)
-> para trabajar con datos reales de forma estrictamente local.
+**Estos notebooks trabajan con material real, no ficticio**: cada uno te
+pide **subir tu propio PDF** (cualquier CV real que quieras probar) y usan
+la rúbrica que efectivamente usa el sistema en producción — así el flujo
+que ves es el flujo real, no una recreación con datos inventados.
+
+> ⚠️ El PDF que subas y el nombre que ingreses quedan **solo en la memoria
+> de tu sesión de Colab** — nunca se guardan en este repositorio ni se
+> suben a GitHub. Si activás el modo real (ver más abajo), solo el texto
+> **ya anonimizado** sale hacia la API del modelo. Ver
+> [`materiales/README.md`](materiales/README.md) para trabajar con
+> archivos reales guardados localmente en disco.
 
 ## Las 4 etapas del pipeline
 
@@ -47,13 +55,16 @@ detalle de cada notebook individual.
 El notebook de las siete consultas (`03` y la Etapa 3 de `00`) funciona en
 dos modos:
 
-- **Simulado** (por defecto, sin credenciales): genera respuestas de
-  ejemplo determinísticas, suficientes para seguir la lógica del pipeline
-  sin gastar cuota de API.
+- **Simulado** (por defecto, sin credenciales): cada una de las 7 consultas
+  responde honestamente "sin evidencia" (`null`) — sin una clave real no
+  hay forma de simular una lectura genuina de tu CV, así que el notebook
+  no inventa un resultado; solo te deja ver la mecánica de las 7 llamadas
+  independientes.
 - **Real**: si definís un secreto `DEEPSEEK_API_KEY` en Colab (ícono de
   llave 🔑 en la barra lateral izquierda) o la variable de entorno del mismo
   nombre, el notebook llama a la API real de DeepSeek
-  (`deepseek-v4-flash`, compatible con el SDK de OpenAI).
+  (`deepseek-v4-flash`, compatible con el SDK de OpenAI) y el modelo lee tu
+  CV real, criterio por criterio.
 
 Ninguna clave se pide ni se lee del código — nunca la escribas directamente
 en un notebook.
@@ -76,13 +87,13 @@ pip install -r requirements.txt
 jupyter notebook notebooks/
 ```
 
-## Referencia — la fórmula de agregación
+## Referencia — la fórmula de agregación (perfil AL · Asistente Legal)
 
-| Dimensión    | Criterios | Peso |
-|--------------|-----------|------|
-| Formación    | 3         | 20 % |
-| Experiencia  | 2         | 25 % |
-| Técnico      | 2         | 15 % |
+| Dimensión    | Criterios              | Peso |
+|--------------|-------------------------|------|
+| Formación    | AL_01, AL_02, AL_03     | 20 % |
+| Experiencia  | AL_04, AL_05            | 25 % |
+| Técnico      | AL_06, AL_07            | 15 % |
 
 Subtotal máximo: **60 puntos**. Clasificación: **< 60 %** no apto ·
 **60–80 %** reserva · **≥ 80 %** apto para entrevista. La entrevista

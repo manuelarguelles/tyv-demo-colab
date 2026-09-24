@@ -19,14 +19,21 @@ materiales/
 
 ## Cómo usarlos desde un notebook
 
-Los notebooks del repo (`00`–`04`) usan por defecto un **CV ficticio
-embebido en el propio notebook**, así que corren sin depender de esta
-carpeta. Si querés probarlos con un archivo real, en Google Colab subilo
-directamente al entorno de ejecución (ícono de carpeta 📁 en la barra
-lateral) — Colab no tiene acceso a tu disco local, así que esta carpeta
-`materiales/` solo aplica si corrés los notebooks **localmente** con Jupyter
-(`pip install jupyter && jupyter notebook`), apuntando la ruta del PDF a
-`materiales/cvs/<archivo>.pdf` en vez de `cv_ejemplo.pdf`.
+Los notebooks del repo (`00`, `01`, `02`, `03`) **piden un CV real** para
+correr — no traen ningún CV de ejemplo embebido. Según dónde corras:
+
+- **En Google Colab** (lo recomendado, ver los badges del README principal):
+  la celda de carga abre el selector de archivos del navegador
+  (`google.colab.files.upload()`) — subís el PDF directamente desde tu
+  computadora a la sesión. Colab no tiene acceso a esta carpeta local, así
+  que `materiales/` no aplica ahí.
+- **Corriendo localmente** (`jupyter notebook`, fuera de Colab): la misma
+  celda detecta que no está en Colab y busca automáticamente un PDF en
+  `materiales/cvs/`. Copiá tu CV real ahí (cualquier nombre, extensión
+  `.pdf`) antes de correr esa celda.
+
+En ambos casos el archivo **nunca se guarda en el repositorio** — en Colab
+vive solo en la sesión; localmente, `materiales/` está en `.gitignore`.
 
 ## Origen de los materiales reales del proyecto
 
