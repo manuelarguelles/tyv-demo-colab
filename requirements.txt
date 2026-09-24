@@ -1,0 +1,7 @@
+# Dependencias para correr los notebooks localmente (fuera de Google Colab,
+# que ya trae la mayoría preinstalado). Poppler (pdftotext) se instala aparte
+# a nivel de sistema — ver README.md.
+reportlab>=4.0
+pydantic>=2.6
+openai>=1.30
+jupyter>=1.0

@@ -1,0 +1,29 @@
+# Materiales reales (CVs, rúbricas propietarias, datos de candidatos) — NUNCA se publican.
+# Esta carpeta es solo para trabajar localmente; copiá/pegá tus archivos ahí.
+# (materiales/* + negación puntual del README, no materiales/, para que el
+# README sí se suba pero CUALQUIER cosa que pongas dentro de cvs/ o
+# rubricas/ quede ignorada sin excepción)
+materiales/*
+!materiales/README.md
+
+# Credenciales
+.env
+.env.*
+!.env.example
+*.key
+*_key.json
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Artefactos generados al correr los notebooks localmente
+*.pdf
+!ejemplos/*.pdf
+
+# SO / editor
+.DS_Store
+.vscode/
