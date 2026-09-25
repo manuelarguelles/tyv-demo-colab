@@ -23,6 +23,15 @@ que ves es el flujo real, no una recreación con datos inventados.
 > [`materiales/README.md`](materiales/README.md) para trabajar con
 > archivos reales guardados localmente en disco.
 
+> ℹ️ **Nota de honestidad sobre la anonimización.** El módulo de
+> `02_anonimizacion.ipynb` es código real — el mismo que existe, probado,
+> en el laboratorio del proyecto — y acá corre activo sobre lo que subas.
+> Pero la corrida que produjo los resultados numéricos reportados en el
+> capítulo IV de la tesis (181 CVs) **no pasó por esta etapa**: por motivos
+> de velocidad, esa evaluación se hizo enviando el texto extraído sin
+> redactar. Este repositorio muestra el pipeline **tal como está
+> diseñado para funcionar**, no reproduce esa corrida específica.
+
 ## Las 4 etapas del pipeline
 
 | # | Etapa | Qué hace | Notebook |
